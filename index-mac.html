@@ -35,12 +35,16 @@
             --apple-blue: #009DDC;
         }
 
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Chicago', 'Geneva', 'Charcoal', monospace;
             font-size: 12px;
             line-height: 1.4;
             background: var(--mac-desktop);
-            min-height: 100vh;
             padding: 0;
             /* Classic Mac desktop dither pattern */
             background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' fill='%23555577'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23555577'/%3E%3C/svg%3E");
@@ -125,7 +129,8 @@
         .desktop {
             margin-top: 28px;
             padding: 12px;
-            min-height: calc(100vh - 28px);
+            height: calc(100vh - 28px);
+            overflow: hidden;
         }
 
         /* ========================================
@@ -138,6 +143,9 @@
             position: relative;
             max-width: 1400px;
             margin: 0 auto;
+            max-height: calc(100vh - 52px);
+            display: flex;
+            flex-direction: column;
         }
 
         /* Title Bar with horizontal stripes - Active window */
@@ -223,6 +231,8 @@
         /* Window Content Area */
         .window-content {
             position: relative;
+            flex: 1;
+            overflow-y: auto;
         }
 
         .content-inner {
