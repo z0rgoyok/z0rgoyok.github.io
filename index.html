@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denis Zabozhanov — Technical Consultant</title>
+    <meta name="description" content="Denis Zabozhanov: Technical Consultant, Solution Architect. Flutter, Python, Infrastructure, AI-augmented development.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-elevated: #111111;
+            --text: #e8e6e3;
+            --text-muted: #888888;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --link: #88aaff;
+            --border: #2a2a2a;
+            --terminal-green: #33ff33;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Newsreader', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* ASCII Header */
+        .ascii-header {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--accent-dim);
+            white-space: pre;
+            overflow-x: auto;
+            padding: 2rem 1rem;
+            text-align: center;
+            opacity: 0.7;
+            user-select: none;
+        }
+
+        @media (max-width: 600px) {
+            .ascii-header {
+                font-size: 0.35rem;
+            }
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem 4rem;
+        }
+
+        /* Navigation */
+        nav {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::before {
+            content: '>';
+            margin-right: 0.5rem;
+            color: var(--accent-dim);
+        }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .hero h1 .cursor {
+            display: inline-block;
+            width: 0.6em;
+            height: 1.1em;
+            background: var(--accent);
+            margin-left: 0.1em;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        h2::before {
+            content: '# ';
+            color: var(--text-muted);
+        }
+
+        h3 {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+
+        a:hover {
+            text-decoration-color: var(--link);
+        }
+
+        /* Stats Block */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .stat {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+
+        .project:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project h3 {
+            margin-bottom: 0;
+        }
+
+        .project-meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .project p {
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .tech-stack {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-dim);
+        }
+
+        /* Skills List */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .skill-category li {
+            padding: 0.25rem 0;
+        }
+
+        .skill-category li::before {
+            content: '•';
+            color: var(--accent-dim);
+            margin-right: 0.5rem;
+        }
+
+        /* Contact Block */
+        .contact-block {
+            background: linear-gradient(135deg, var(--bg-elevated) 0%, #0d1a12 100%);
+            border: 1px solid var(--accent-dim);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .contact-block h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .contact-links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .contact-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Quote Block */
+        blockquote {
+            border-left: 3px solid var(--accent-dim);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* Terminal Block */
+        .terminal {
+            background: #0d0d0d;
+            border: 1px solid var(--border);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: var(--bg-elevated);
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27ca40; }
+
+        .terminal-body {
+            padding: 1rem;
+            line-height: 1.8;
+        }
+
+        .terminal-body .prompt {
+            color: var(--accent);
+        }
+
+        .terminal-body .command {
+            color: var(--text);
+        }
+
+        .terminal-body .output {
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        footer .ascii-small {
+            font-size: 0.6rem;
+            margin-bottom: 1rem;
+            color: var(--accent-dim);
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .container { padding: 0 1.5rem 3rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            html { font-size: 16px; }
+            .container { padding: 0 1rem 3rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Subtle animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero, section {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        section:nth-child(5) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="ascii-header">
+██████╗ ███████╗███╗   ██╗██╗███████╗    ███████╗ █████╗ ██████╗  ██████╗ ███████╗██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ██╗   ██╗
+██╔══██╗██╔════╝████╗  ██║██║██╔════╝    ╚══███╔╝██╔══██╗██╔══██╗██╔═══██╗╚══███╔╝██║  ██║██╔══██╗████╗  ██║██╔═══██╗██║   ██║
+██║  ██║█████╗  ██╔██╗ ██║██║███████╗      ███╔╝ ███████║██████╔╝██║   ██║  ███╔╝ ███████║███████║██╔██╗ ██║██║   ██║██║   ██║
+██║  ██║██╔══╝  ██║╚██╗██║██║╚════██║     ███╔╝  ██╔══██║██╔══██╗██║   ██║ ███╔╝  ██╔══██║██╔══██║██║╚██╗██║██║   ██║╚██╗ ██╔╝
+██████╔╝███████╗██║ ╚████║██║███████║    ███████╗██║  ██║██████╔╝╚██████╔╝███████╗██║  ██║██║  ██║██║ ╚████║╚██████╔╝ ╚████╔╝
+╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝╚══════╝    ╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═══╝
+    </div>
+
+    <div class="container">
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <header class="hero">
+            <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;">
+                <img src="photo.jpg" alt="Denis Zabozhanov" style="width:100px;height:100px;border-radius:4px;border:2px solid var(--border);object-fit:cover;">
+                <div>
+                    <h1 style="margin-bottom:0.5rem;">Denis Zabozhanov<span class="cursor"></span></h1>
+                    <p class="tagline" style="margin-bottom:0;">Technical Consultant · Solution Architect · AI-Augmented Developer</p>
+                </div>
+            </div>
+            <p class="intro">
+                I build <strong>production-grade software</strong> from concept to deployment.
+                One person doing the work of a 4-5 person team: business analysis, system design,
+                mobile apps, backends, and infrastructure. I ship <strong>2-3x faster</strong>
+                using modern AI tools—not as a crutch, but as a force multiplier.
+            </p>
+            <p class="intro">
+                I believe in <strong>Clean Architecture</strong>,
+                <strong>Domain-Driven Design</strong>, and code that reads like well-written prose.
+            </p>
+        </header>
+
+        <section id="about">
+            <h2>The Pitch</h2>
+
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                </div>
+                <div class="terminal-body">
+                    <div><span class="prompt">$</span> <span class="command">whoami</span></div>
+                    <div class="output">Technical consultant who actually ships code</div>
+                    <br>
+                    <div><span class="prompt">$</span> <span class="command">cat philosophy.txt</span></div>
+                    <div class="output">→ Understand the business problem first</div>
+                    <div class="output">→ Design the architecture second</div>
+                    <div class="output">→ Write the code last</div>
+                    <br>
+                    <div><span class="prompt">$</span> <span class="command">ls -la ./superpowers/</span></div>
+                    <div class="output">drwxr-xr-x  flutter-apps/</div>
+                    <div class="output">drwxr-xr-x  python-backends/</div>
+                    <div class="output">drwxr-xr-x  infrastructure/</div>
+                    <div class="output">drwxr-xr-x  system-analysis/</div>
+                    <div class="output">drwxr-xr-x  ai-tooling/</div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-value">5</span>
+                    <span class="stat-label">Production Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">AI Models Integrated</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Selected Work</h2>
+
+            <div class="projects-grid">
+            <div class="project">
+                <div class="project-header">
+                    <h3>Pattita</h3>
+                    <span class="project-meta">B2B SaaS · Production</span>
+                </div>
+                <p>
+                    Self-service platform for dance festival organizers. Complex pricing matrices,
+                    multi-criteria judging system, Stripe Connect integration for marketplace payments.
+                    Running 5-6 festivals per year with real paying customers.
+                </p>
+                <p class="tech-stack">Flutter · Django 5.1 · PostgreSQL · Stripe Connect · Prometheus</p>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3>Intelligent Review Pipeline</h3>
+                    <span class="project-meta">DevOps Tooling</span>
+                </div>
+                <p>
+                    Multi-agent code review automation for Kotlin Multiplatform. Supports 5+ AI models
+                    (Claude, Codex, Gemini), JSON-driven architecture, GitLab CI/CD integration with
+                    automatic report publishing. Principal Engineer-level analysis via embedded AGENTS.md rules.
+                </p>
+                <p class="tech-stack">Bash · Python · JavaScript · GitLab API · Claude · Codex</p>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3>Kotlin Code Quality Framework</h3>
+                    <span class="project-meta">Static Analysis</span>
+                </div>
+                <p>
+                    Enterprise-grade Kotlin static analyzer with 10 custom rules for KDoc validation
+                    and architectural constraint enforcement. Works with AST via IntelliJ PSI API.
+                    72% test coverage, fat-JAR runner for CI integration.
+                </p>
+                <p class="tech-stack">Kotlin 2.0 · Detekt · IntelliJ PSI API · Gradle</p>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3><a href="https://github.com/z0rgoyok/idea-focus-tracker">Focus Time Tracker</a></h3>
+                    <span class="project-meta">IntelliJ Plugin</span>
+                </div>
+                <p>
+                    Developer productivity plugin for JetBrains IDEs. Automatic focus tracking with
+                    intelligent idle detection (60s threshold), system suspend handling, Git branch-level
+                    time tracking. Dashboard with 7-day charts and 30-day heatmap visualization.
+                </p>
+                <p class="tech-stack">Kotlin · IntelliJ Platform SDK · Swing · Git4Idea</p>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3><a href="https://github.com/z0rgoyok/worktree-manager">Worktree Manager</a></h3>
+                    <span class="project-meta">macOS App</span>
+                </div>
+                <p>
+                    Native macOS application for Git worktree management. Features Kanban board for
+                    task tracking, real-time file system watching, editor integration (VS Code, Cursor,
+                    IntelliJ, Xcode). Built with Clean Architecture + DDD principles.
+                </p>
+                <p class="tech-stack">Swift · SwiftUI · Git CLI · Combine</p>
+            </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Arsenal</h2>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Mobile Development</h4>
+                    <ul>
+                        <li>Flutter / Dart</li>
+                        <li>Firebase Suite</li>
+                        <li>GetX, Provider</li>
+                        <li>Clean Architecture</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Backend Systems</h4>
+                    <ul>
+                        <li>Python / Django / DRF</li>
+                        <li>FastAPI</li>
+                        <li>PostgreSQL / Redis</li>
+                        <li>Kafka</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Infrastructure</h4>
+                    <ul>
+                        <li>Docker / Compose</li>
+                        <li>GitLab CI / GitHub Actions</li>
+                        <li>Nginx</li>
+                        <li>Prometheus / Sentry</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>AI Tooling</h4>
+                    <ul>
+                        <li>Claude / Claude Code</li>
+                        <li>OpenAI Codex</li>
+                        <li>Google Gemini</li>
+                        <li>Cursor AI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <blockquote>
+                "I don't just use AI to write code faster—I use it to think through
+                problems differently, explore architectural alternatives, and maintain
+                code quality at scale. The future belongs to developers who know how
+                to orchestrate these tools."
+            </blockquote>
+        </section>
+
+        <section id="approach">
+            <h2>How I Work</h2>
+            <p>
+                Every project starts with understanding the <em>why</em>. What business problem
+                are we solving? What invariants must hold? What are the real constraints?
+            </p>
+            <p>
+                I practice <strong>Domain-Driven Design</strong> religiously. Business rules
+                live in the domain layer—nowhere else. The code should read like the spec.
+            </p>
+            <p>
+                I believe in <strong>fail-fast, no-fallback</strong> approaches. Explicit errors
+                beat silent failures. Strict typing beats <code>Any</code>. Clear contracts beat
+                implicit assumptions.
+            </p>
+            <p>
+                And I document everything with <strong>AGENTS.md</strong> files—architectural
+                guides that help both humans and AI assistants understand the codebase rules.
+            </p>
+        </section>
+
+        <section id="contact">
+            <h2>Let's Build Something</h2>
+
+            <div class="contact-block">
+                <h3>Available for Technical Consulting</h3>
+                <p>
+                    Whether you need a full product built from scratch, an architectural review,
+                    or help integrating AI tools into your development workflow—I'm here.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:zabozhanov@gmail.com">Email</a>
+                    <a href="https://github.com/z0rgoyok">GitHub</a>
+                    <a href="https://linkedin.com/in/denis-zabozhanov-415b9358">LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="ascii-small">
+/* EOF */
+        </div>
+        <p>© 2025 Denis Zabozhanov · Built with code, coffee, and Claude</p>
+        <p style="margin-top: 0.5rem; font-size: 0.7rem;">
+            This page contains no tracking, no cookies, no JavaScript frameworks. Just HTML and CSS.
+        </p>
+    </footer>
+</body>
+</html>

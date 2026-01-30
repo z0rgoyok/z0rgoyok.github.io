@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denis Zabozhanov - Macintosh</title>
+    <style>
+        /* Macintosh System 7 Authentic Styling - Based on Apple HIG 1992 */
+        @font-face {
+            font-family: 'Chicago';
+            src: url('https://cdn.jsdelivr.net/gh/nickshanks/Chick@master/Fonts/ChicagoFLF.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Classic Mac System Colors */
+            --mac-white: #FFFFFF;
+            --mac-black: #000000;
+            --mac-gray-light: #DDDDDD;
+            --mac-gray: #AAAAAA;
+            --mac-gray-dark: #555555;
+            --mac-desktop: #666699;
+
+            /* Rainbow Apple Colors (1977-1998 logo) */
+            --apple-green: #61BB46;
+            --apple-yellow: #FDB827;
+            --apple-orange: #F5821F;
+            --apple-red: #E03A3E;
+            --apple-purple: #963D97;
+            --apple-blue: #009DDC;
+        }
+
+        body {
+            font-family: 'Chicago', 'Geneva', 'Charcoal', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            background: var(--mac-desktop);
+            min-height: 100vh;
+            padding: 0;
+            /* Classic Mac desktop dither pattern */
+            background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' fill='%23555577'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23555577'/%3E%3C/svg%3E");
+            background-color: var(--mac-desktop);
+        }
+
+        /* ========================================
+           MENU BAR - Fixed at top per HIG
+           ======================================== */
+        .menu-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: var(--mac-white);
+            border-bottom: 1px solid var(--mac-black);
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            z-index: 1000;
+            font-size: 12px;
+        }
+
+        .apple-menu {
+            display: flex;
+            align-items: center;
+            padding: 2px 10px 2px 4px;
+            cursor: default;
+            border-right: 1px solid var(--mac-gray);
+            margin-right: 4px;
+        }
+
+        /* Rainbow Apple Logo - authentic 6-stripe */
+        .apple-logo-menu {
+            width: 14px;
+            height: 17px;
+            position: relative;
+            background: linear-gradient(180deg,
+                var(--apple-green) 0% 16.66%,
+                var(--apple-yellow) 16.66% 33.33%,
+                var(--apple-orange) 33.33% 50%,
+                var(--apple-red) 50% 66.66%,
+                var(--apple-purple) 66.66% 83.33%,
+                var(--apple-blue) 83.33% 100%
+            );
+            clip-path: polygon(
+                50% 0%, 65% 8%, 55% 18%,
+                78% 22%, 88% 40%, 85% 60%,
+                78% 82%, 60% 100%, 50% 100%,
+                40% 100%, 22% 82%, 15% 60%,
+                12% 40%, 22% 22%, 45% 18%,
+                35% 8%
+            );
+        }
+
+        .menu-item {
+            padding: 2px 12px;
+            cursor: default;
+            font-weight: bold;
+        }
+
+        .menu-item:hover {
+            background: var(--mac-black);
+            color: var(--mac-white);
+        }
+
+        .menu-spacer {
+            flex: 1;
+        }
+
+        .menu-right {
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ========================================
+           DESKTOP CONTAINER
+           ======================================== */
+        .desktop {
+            margin-top: 28px;
+            padding: 12px;
+            min-height: calc(100vh - 28px);
+        }
+
+        /* ========================================
+           AUTHENTIC MAC WINDOW - Per HIG Chapter 5
+           ======================================== */
+        .window {
+            background: var(--mac-white);
+            border: 1px solid var(--mac-black);
+            box-shadow: 1px 1px 0 var(--mac-black);
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Title Bar with horizontal stripes - Active window */
+        .title-bar {
+            height: 20px;
+            background: var(--mac-white);
+            border-bottom: 1px solid var(--mac-black);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Close Box - upper left per HIG */
+        .close-box {
+            position: absolute;
+            left: 8px;
+            top: 4px;
+            width: 13px;
+            height: 11px;
+            border: 1px solid var(--mac-black);
+            background: var(--mac-white);
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        /* Horizontal stripes - HIG specifies these for active windows */
+        .title-stripes-left,
+        .title-stripes-right {
+            flex: 1;
+            height: 11px;
+            margin: 0 8px;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--mac-white) 0px,
+                var(--mac-white) 1px,
+                var(--mac-black) 1px,
+                var(--mac-black) 2px,
+                var(--mac-white) 2px,
+                var(--mac-white) 3px
+            );
+        }
+
+        .title-stripes-left {
+            margin-left: 26px;
+        }
+
+        .title-stripes-right {
+            margin-right: 26px;
+        }
+
+        .title-bar-text {
+            font-weight: bold;
+            font-size: 12px;
+            white-space: nowrap;
+            padding: 0 8px;
+            background: var(--mac-white);
+        }
+
+        /* Zoom Box - upper right per HIG */
+        .zoom-box {
+            position: absolute;
+            right: 8px;
+            top: 4px;
+            width: 13px;
+            height: 11px;
+            border: 1px solid var(--mac-black);
+            background: var(--mac-white);
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .zoom-box::after {
+            content: '';
+            position: absolute;
+            right: 2px;
+            bottom: 2px;
+            width: 7px;
+            height: 6px;
+            border: 1px solid var(--mac-black);
+            background: var(--mac-white);
+        }
+
+        /* Window Content Area */
+        .window-content {
+            position: relative;
+        }
+
+        .content-inner {
+            padding: 16px;
+        }
+
+        /* Vertical Scroll Bar - Per HIG Chapter 7 */
+        .scroll-bar-v {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 15px;
+            width: 16px;
+            background: var(--mac-white);
+            border-left: 1px solid var(--mac-black);
+        }
+
+        .scroll-arrow {
+            width: 15px;
+            height: 16px;
+            border-bottom: 1px solid var(--mac-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            cursor: pointer;
+            background: var(--mac-white);
+        }
+
+        .scroll-arrow:hover {
+            background: var(--mac-gray-light);
+        }
+
+        .scroll-arrow-down {
+            position: absolute;
+            bottom: 0;
+            border-bottom: none;
+            border-top: 1px solid var(--mac-black);
+        }
+
+        .scroll-track {
+            position: absolute;
+            top: 16px;
+            bottom: 16px;
+            left: 0;
+            right: 0;
+            /* HIG-specified scroll track pattern */
+            background: url("data:image/svg+xml,%3Csvg width='2' height='2' viewBox='0 0 2 2' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23AAAAAA'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23AAAAAA'/%3E%3C/svg%3E");
+        }
+
+        .scroll-thumb {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: var(--mac-white);
+            border: 1px solid var(--mac-black);
+            cursor: grab;
+        }
+
+        /* Size Box - lower right corner per HIG */
+        .size-box {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--mac-white);
+            border-left: 1px solid var(--mac-black);
+            border-top: 1px solid var(--mac-black);
+            cursor: nwse-resize;
+        }
+
+        .size-box::before {
+            content: '';
+            position: absolute;
+            right: 2px;
+            bottom: 2px;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg,
+                transparent 0%, transparent 40%,
+                var(--mac-black) 40%, var(--mac-black) 45%,
+                transparent 45%, transparent 55%,
+                var(--mac-black) 55%, var(--mac-black) 60%,
+                transparent 60%, transparent 70%,
+                var(--mac-black) 70%, var(--mac-black) 75%,
+                transparent 75%, transparent 100%
+            );
+        }
+
+        /* ========================================
+           HEADER SECTION
+           ======================================== */
+        .header-section {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--mac-black);
+            margin-bottom: 16px;
+        }
+
+        .photo-frame {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--mac-black);
+            padding: 2px;
+            background: var(--mac-white);
+            flex-shrink: 0;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.3);
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .header-info h1 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .header-info .subtitle {
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .header-info .location {
+            font-size: 10px;
+            color: var(--mac-gray-dark);
+        }
+
+        /* Rainbow decoration bar */
+        .rainbow-bar {
+            height: 6px;
+            display: flex;
+            margin: 8px 0;
+            width: 100px;
+        }
+
+        .rainbow-bar span {
+            flex: 1;
+        }
+
+        /* ========================================
+           INNER WINDOWS (Dialogs/Panels)
+           ======================================== */
+        .panel {
+            border: 1px solid var(--mac-black);
+            background: var(--mac-white);
+            margin-bottom: 16px;
+        }
+
+        .panel-title {
+            background: var(--mac-white);
+            border-bottom: 1px solid var(--mac-black);
+            padding: 3px 8px;
+            font-weight: bold;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .panel-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel-content {
+            padding: 12px;
+        }
+
+        /* ========================================
+           ABOUT SECTION - Mac Dialog Style
+           ======================================== */
+        .about-dialog {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        /* Mac "Note" icon - happy Mac face */
+        .mac-happy-icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--mac-black);
+            border-radius: 3px;
+            position: relative;
+            background: var(--mac-white);
+            flex-shrink: 0;
+        }
+
+        .mac-happy-icon::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 5px;
+            width: 5px;
+            height: 5px;
+            background: var(--mac-black);
+            border-radius: 50%;
+            box-shadow: 12px 0 0 var(--mac-black);
+        }
+
+        .mac-happy-icon::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 8px;
+            width: 12px;
+            height: 3px;
+            border: 2px solid var(--mac-black);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .about-text p {
+            margin-bottom: 8px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: var(--mac-black);
+            color: var(--mac-white);
+            padding: 0 3px;
+        }
+
+        /* ========================================
+           PROJECTS - Finder List View Style
+           ======================================== */
+        .projects-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 0;
+        }
+
+        .project-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 8px;
+            border-bottom: 1px dotted var(--mac-gray);
+            gap: 8px;
+        }
+
+        .project-item:hover {
+            background: var(--mac-black);
+            color: var(--mac-white);
+        }
+
+        .project-item:hover .project-tech {
+            color: var(--mac-gray-light);
+        }
+
+        /* 32x32 Document Icon - per HIG Chapter 8 */
+        .doc-icon-32 {
+            width: 24px;
+            height: 28px;
+            background: var(--mac-white);
+            border: 1px solid var(--mac-black);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .doc-icon-32::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 7px;
+            height: 7px;
+            background: linear-gradient(135deg, var(--mac-white) 50%, var(--mac-black) 50%);
+            border-left: 1px solid var(--mac-black);
+            border-bottom: 1px solid var(--mac-black);
+        }
+
+        .doc-icon-32.app::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 3px;
+            right: 3px;
+            height: 1px;
+            background: var(--mac-black);
+            box-shadow: 0 3px 0 var(--mac-black), 0 6px 0 var(--mac-black);
+        }
+
+        .project-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .project-name {
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        .project-name a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        .project-desc {
+            font-size: 10px;
+            line-height: 1.3;
+            margin-bottom: 2px;
+        }
+
+        .project-tech {
+            font-size: 9px;
+            color: var(--mac-gray-dark);
+        }
+
+        /* ========================================
+           SKILLS - Extension icons style
+           ======================================== */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border: 1px solid var(--mac-black);
+            font-size: 10px;
+            background: var(--mac-white);
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: var(--mac-black);
+            color: var(--mac-white);
+        }
+
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 0;
+        }
+
+        /* ========================================
+           CONTACT - Mac Buttons per HIG
+           ======================================== */
+        .contact-section {
+            text-align: center;
+            padding: 16px 0;
+        }
+
+        .contact-section p {
+            margin-bottom: 12px;
+            font-size: 11px;
+        }
+
+        .mac-button {
+            display: inline-block;
+            padding: 4px 16px;
+            margin: 4px;
+            border: 2px solid var(--mac-black);
+            border-radius: 6px;
+            background: var(--mac-white);
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--mac-black);
+            /* HIG-specified 3D button effect */
+            box-shadow:
+                inset -1px -1px 0 var(--mac-gray-dark),
+                inset 1px 1px 0 var(--mac-white);
+        }
+
+        .mac-button:hover {
+            background: var(--mac-gray-light);
+        }
+
+        .mac-button:active {
+            background: var(--mac-black);
+            color: var(--mac-white);
+            box-shadow:
+                inset 1px 1px 0 var(--mac-black);
+        }
+
+        /* Primary button - thick border per HIG */
+        .mac-button.primary {
+            box-shadow:
+                0 0 0 2px var(--mac-white),
+                0 0 0 4px var(--mac-black),
+                inset -1px -1px 0 var(--mac-gray-dark),
+                inset 1px 1px 0 var(--mac-white);
+        }
+
+        /* ========================================
+           FOOTER / STATUS BAR
+           ======================================== */
+        .status-bar {
+            border-top: 1px solid var(--mac-black);
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            background: var(--mac-white);
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ========================================
+           TWO COLUMN LAYOUT
+           ======================================== */
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 700px) {
+            .two-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .header-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .rainbow-bar {
+                margin: 8px auto;
+            }
+        }
+
+        /* ========================================
+           STATS ROW
+           ======================================== */
+        .stats-row {
+            display: flex;
+            gap: 24px;
+            padding: 12px 0;
+            border-top: 1px dotted var(--mac-black);
+            margin-top: 12px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: var(--mac-gray-dark);
+        }
+
+        /* ========================================
+           FULL WIDTH SECTION
+           ======================================== */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* ========================================
+           LINKS
+           ======================================== */
+        a {
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Bar - Fixed at top per HIG -->
+    <div class="menu-bar">
+        <div class="apple-menu">
+            <div class="apple-logo-menu"></div>
+        </div>
+        <span class="menu-item">File</span>
+        <span class="menu-item">Edit</span>
+        <span class="menu-item">View</span>
+        <span class="menu-item">Special</span>
+        <div class="menu-spacer"></div>
+        <div class="menu-right">
+            <span>9:41 AM</span>
+        </div>
+    </div>
+
+    <!-- Desktop -->
+    <div class="desktop">
+        <!-- Main Window -->
+        <div class="window">
+            <!-- Title Bar with stripes (active window) -->
+            <div class="title-bar">
+                <div class="close-box"></div>
+                <div class="title-stripes-left"></div>
+                <span class="title-bar-text">Denis Zabozhanov</span>
+                <div class="title-stripes-right"></div>
+                <div class="zoom-box"></div>
+            </div>
+
+            <!-- Window Content -->
+            <div class="window-content">
+                <div class="content-inner">
+                    <!-- Header -->
+                    <div class="header-section">
+                        <div class="photo-frame">
+                            <img src="photo.jpg" alt="Denis Zabozhanov">
+                        </div>
+                        <div class="header-info">
+                            <h1>Denis Zabozhanov</h1>
+                            <div class="subtitle">Technical Consultant / Solution Architect</div>
+                            <div class="rainbow-bar">
+                                <span style="background: var(--apple-green);"></span>
+                                <span style="background: var(--apple-yellow);"></span>
+                                <span style="background: var(--apple-orange);"></span>
+                                <span style="background: var(--apple-red);"></span>
+                                <span style="background: var(--apple-purple);"></span>
+                                <span style="background: var(--apple-blue);"></span>
+                            </div>
+                            <div class="location">Remote · Building software since 2008</div>
+                        </div>
+                    </div>
+
+                    <!-- About Panel -->
+                    <div class="panel">
+                        <div class="panel-title">
+                            <span class="panel-icon">📄</span>
+                            About This Developer
+                        </div>
+                        <div class="panel-content">
+                            <div class="about-dialog">
+                                <div class="mac-happy-icon"></div>
+                                <div class="about-text">
+                                    <p><strong>Welcome to my digital workspace!</strong></p>
+                                    <p>I build <span class="highlight">production-grade software</span> from concept to deployment. One person doing the work of a 4-5 person team: business analysis, system design, mobile apps, backends, and infrastructure.</p>
+                                    <p>I believe in <span class="highlight">Clean Architecture</span>, <span class="highlight">Domain-Driven Design</span>, and code that reads like well-written prose. I use modern AI tools to ship <span class="highlight">2-3x faster</span>.</p>
+                                </div>
+                            </div>
+                            <div class="stats-row">
+                                <div class="stat">
+                                    <div class="stat-value">5</div>
+                                    <div class="stat-label">Production Projects</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">5+</div>
+                                    <div class="stat-label">AI Models</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">17+</div>
+                                    <div class="stat-label">Years Experience</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two Column Layout -->
+                    <div class="two-cols">
+                        <!-- Projects Panel -->
+                        <div class="panel full-width">
+                            <div class="panel-title">
+                                <span class="panel-icon">📁</span>
+                                Projects
+                            </div>
+                            <div class="panel-content" style="padding: 0;">
+                                <div class="projects-list">
+                                    <div class="project-item">
+                                        <div class="doc-icon-32 app"></div>
+                                        <div class="project-info">
+                                            <div class="project-name">Pattita</div>
+                                            <div class="project-desc">B2B SaaS for dance festivals. Pricing, judging, Stripe Connect.</div>
+                                            <div class="project-tech">Flutter · Django · Stripe Connect</div>
+                                        </div>
+                                    </div>
+                                    <div class="project-item">
+                                        <div class="doc-icon-32"></div>
+                                        <div class="project-info">
+                                            <div class="project-name">Intelligent Review Pipeline</div>
+                                            <div class="project-desc">Multi-agent AI code review for Kotlin Multiplatform.</div>
+                                            <div class="project-tech">Python · Claude · Codex · Gemini</div>
+                                        </div>
+                                    </div>
+                                    <div class="project-item">
+                                        <div class="doc-icon-32"></div>
+                                        <div class="project-info">
+                                            <div class="project-name">Kotlin Code Quality Framework</div>
+                                            <div class="project-desc">Static analyzer. 10 Detekt rules, IntelliJ PSI API, 72% coverage.</div>
+                                            <div class="project-tech">Kotlin 2.0 · Detekt · Gradle</div>
+                                        </div>
+                                    </div>
+                                    <div class="project-item">
+                                        <div class="doc-icon-32 app"></div>
+                                        <div class="project-info">
+                                            <div class="project-name"><a href="https://github.com/z0rgoyok/idea-focus-tracker">Focus Time Tracker</a></div>
+                                            <div class="project-desc">IntelliJ plugin. Auto tracking, Git branches, heatmaps.</div>
+                                            <div class="project-tech">Kotlin · IntelliJ SDK · Swing</div>
+                                        </div>
+                                    </div>
+                                    <div class="project-item">
+                                        <div class="doc-icon-32 app"></div>
+                                        <div class="project-info">
+                                            <div class="project-name"><a href="https://github.com/z0rgoyok/worktree-manager">Worktree Manager</a></div>
+                                            <div class="project-desc">Native macOS app. Kanban, editor integration, file watching.</div>
+                                            <div class="project-tech">Swift · SwiftUI · Combine</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Panel -->
+                        <div class="panel">
+                            <div class="panel-title">
+                                <span class="panel-icon">🧩</span>
+                                System Extensions
+                            </div>
+                            <div class="panel-content">
+                                <div class="skills-grid">
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-blue);"></span>Flutter/Dart</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-green);"></span>Python/Django</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-purple);"></span>Kotlin</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-orange);"></span>Swift</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-blue);"></span>PostgreSQL</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-red);"></span>Redis</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-yellow);"></span>Docker</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-green);"></span>CI/CD</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-purple);"></span>Clean Architecture</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-orange);"></span>DDD</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-blue);"></span>Claude AI</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-red);"></span>Codex</span>
+                                    <span class="skill-tag"><span class="skill-dot" style="background: var(--apple-yellow);"></span>Gemini</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Panel -->
+                        <div class="panel">
+                            <div class="panel-title">
+                                <span class="panel-icon">📮</span>
+                                Network
+                            </div>
+                            <div class="panel-content contact-section">
+                                <p>Available for technical consulting and project work</p>
+                                <a href="mailto:zabozhanov@gmail.com" class="mac-button primary">✉ Email</a>
+                                <a href="https://github.com/z0rgoyok" class="mac-button">GitHub</a>
+                                <a href="https://linkedin.com/in/denis-zabozhanov-415b9358" class="mac-button">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Size Box -->
+                <div class="size-box"></div>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <div class="status-item">
+                        <span style="color: var(--apple-green);">●</span>
+                        5 projects
+                    </div>
+                    <div class="status-item">
+                        Clean Architecture + DDD
+                    </div>
+                </div>
+                <span>© 2025 Denis Zabozhanov · System 7</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

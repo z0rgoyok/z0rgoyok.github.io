@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denis Zabozhanov's Home Page</title>
+    <style>
+        body {
+            background-color: #008080;
+            font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, sans-serif;
+            font-size: 14px;
+            color: #000000;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .window {
+            background-color: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            box-shadow: 1px 1px 0 #000000;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: #ffffff;
+            font-weight: bold;
+            padding: 3px 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-bar-buttons {
+            display: flex;
+            gap: 2px;
+        }
+
+        .title-bar-button {
+            width: 16px;
+            height: 14px;
+            background: #c0c0c0;
+            border: 1px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            font-size: 10px;
+            line-height: 12px;
+            text-align: center;
+            font-family: 'Marlett', sans-serif;
+        }
+
+        .window-content {
+            padding: 15px;
+        }
+
+        .inset {
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            background: #ffffff;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .outset {
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            background: #c0c0c0;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 28px;
+            color: #000080;
+            margin: 0 0 5px 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            color: #800000;
+            margin: 15px 0 10px 0;
+            border-bottom: 1px solid #808080;
+            padding-bottom: 3px;
+        }
+
+        h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000080;
+            margin: 10px 0 5px 0;
+        }
+
+        p {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+
+        a {
+            color: #0000ff;
+        }
+
+        a:visited {
+            color: #800080;
+        }
+
+        a:hover {
+            color: #ff0000;
+        }
+
+        .marquee-container {
+            background: #000080;
+            color: #ffff00;
+            padding: 5px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .marquee {
+            animation: marquee 15s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .hr-fancy {
+            height: 2px;
+            background: linear-gradient(90deg, #c0c0c0, #000080, #c0c0c0);
+            border: none;
+            margin: 15px 0;
+        }
+
+        table.projects {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+        }
+
+        table.projects th {
+            background: #000080;
+            color: #ffffff;
+            padding: 5px 8px;
+            text-align: left;
+            font-weight: normal;
+        }
+
+        table.projects td {
+            border: 1px solid #808080;
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-card {
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            background: #ffffff;
+            padding: 10px;
+        }
+
+        .project-card h3 {
+            margin: 0 0 5px 0;
+            border-bottom: 1px solid #c0c0c0;
+            padding-bottom: 5px;
+        }
+
+        .project-card .tech {
+            font-size: 11px;
+            color: #808080;
+            margin-top: 8px;
+        }
+
+        table.projects tr:nth-child(even) {
+            background: #e0e0e0;
+        }
+
+        .button {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 4px 15px;
+            font-family: 'MS Sans Serif', Tahoma, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #000000;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background: #d4d4d4;
+        }
+
+        .button:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .skills-list {
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        .skills-list li {
+            margin-bottom: 3px;
+        }
+
+        ul {
+            margin: 5px 0;
+            padding-left: 25px;
+        }
+
+        .email-icon {
+            font-size: 20px;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .badge {
+            border: 1px solid #808080;
+            padding: 3px 8px;
+            background: #ffffcc;
+            font-size: 11px;
+        }
+
+        .counter {
+            font-family: 'Courier New', monospace;
+            background: #000000;
+            color: #00ff00;
+            padding: 2px 8px;
+            border: 2px inset #808080;
+        }
+
+        .status-bar {
+            background: #c0c0c0;
+            border-top: 1px solid #ffffff;
+            padding: 3px 5px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .status-bar div {
+            border: 1px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            padding: 1px 5px;
+        }
+
+        .construction {
+            color: #ff0000;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .photo-frame {
+            border: 3px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            padding: 5px;
+            background: #c0c0c0;
+            display: inline-block;
+        }
+
+        .ascii-art {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            line-height: 1.1;
+            white-space: pre;
+            color: #000080;
+        }
+
+        .guestbook {
+            background: #ffffcc;
+            border: 1px dashed #808080;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 11px;
+            color: #808080;
+        }
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div class="title-bar">
+            <span>Denis Zabozhanov's Home Page - Microsoft Internet Explorer</span>
+            <div class="title-bar-buttons">
+                <div class="title-bar-button">_</div>
+                <div class="title-bar-button">[]</div>
+                <div class="title-bar-button">X</div>
+            </div>
+        </div>
+
+        <div class="window-content">
+            <div class="marquee-container">
+                <div class="marquee">*** Welcome to my Home Page! *** Technical Consultant & Solution Architect *** Flutter * Python * Infrastructure * AI Tools *** Last updated: January 2025 ***</div>
+            </div>
+
+            <div class="inset">
+                <table width="100%"><tr>
+                    <td width="120" valign="top">
+                        <div class="photo-frame">
+                            <img src="photo.jpg" width="100" height="100" alt="Denis Zabozhanov" style="object-fit:cover;">
+                        </div>
+                    </td>
+                    <td valign="middle">
+                        <h1 style="text-align:left;margin-bottom:10px;">Denis Zabozhanov</h1>
+                        <p style="margin:0;"><em>Technical Consultant / Solution Architect</em></p>
+                        <p style="margin:5px 0 0 0;font-size:12px;color:#808080;">Remote · Building software since 2008</p>
+                    </td>
+                </tr></table>
+            </div>
+
+            <hr class="hr-fancy">
+
+            <h2>About Me</h2>
+            <div class="outset">
+                <p>Hello and welcome to my corner of the World Wide Web!</p>
+                <p>I am a <b>Technical Consultant</b> who builds production-grade software from concept to deployment. One person doing the work of a 4-5 person team: business analysis, system design, mobile apps, backends, and infrastructure.</p>
+                <p>I believe in <b>Clean Architecture</b>, <b>Domain-Driven Design</b>, and code that reads like well-written prose. I use modern AI tools to ship <b>2-3x faster</b>.</p>
+            </div>
+
+            <div class="badge-row">
+                <span class="badge">Flutter/Dart</span>
+                <span class="badge">Python/Django</span>
+                <span class="badge">PostgreSQL</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Kafka</span>
+                <span class="badge">Clean Architecture</span>
+            </div>
+
+            <hr class="hr-fancy">
+
+            <h2>My Projects</h2>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Pattita <small>— B2B SaaS</small></h3>
+                    <p>Platform for dance festival organizers. Complex pricing matrices, multi-criteria judging system, Stripe Connect marketplace payments. Running 5-6 festivals/year.</p>
+                    <div class="tech">Flutter · Django · PostgreSQL · Stripe Connect · Prometheus</div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Intelligent Review Pipeline <small>— DevOps</small></h3>
+                    <p>Multi-agent AI code review automation for Kotlin Multiplatform. Supports 5+ AI models, JSON-driven architecture, GitLab CI/CD with automatic report publishing.</p>
+                    <div class="tech">Python · Bash · JavaScript · Claude · Codex · Gemini</div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Kotlin Code Quality Framework <small>— Static Analysis</small></h3>
+                    <p>Enterprise-grade Kotlin static analyzer. 10 custom Detekt rules for KDoc validation and architectural constraints. AST via IntelliJ PSI API. 72% test coverage.</p>
+                    <div class="tech">Kotlin 2.0 · Detekt · IntelliJ PSI API · Gradle</div>
+                </div>
+
+                <div class="project-card">
+                    <h3><a href="https://github.com/z0rgoyok/idea-focus-tracker">Focus Time Tracker</a> <small>— IntelliJ Plugin</small></h3>
+                    <p>Developer productivity plugin for JetBrains IDEs. Automatic focus tracking with idle detection, system suspend handling, Git branch-level tracking. 7-day charts + 30-day heatmap.</p>
+                    <div class="tech">Kotlin · IntelliJ Platform SDK · Swing · Git4Idea</div>
+                </div>
+
+                <div class="project-card">
+                    <h3><a href="https://github.com/z0rgoyok/worktree-manager">Worktree Manager</a> <small>— macOS App</small></h3>
+                    <p>Native macOS application for Git worktree management. Kanban board for tasks, real-time file system watching, editor integration (VS Code, Cursor, IntelliJ, Xcode).</p>
+                    <div class="tech">Swift · SwiftUI · Git CLI · Combine</div>
+                </div>
+            </div>
+
+            <hr class="hr-fancy">
+
+            <h2>Technical Skills</h2>
+            <div class="inset">
+                <table width="100%">
+                    <tr valign="top">
+                        <td width="25%">
+                            <h3>Development</h3>
+                            <ul>
+                                <li>Flutter / Dart</li>
+                                <li>Python / Django / FastAPI</li>
+                                <li>Kotlin / Swift</li>
+                                <li>PostgreSQL / Redis</li>
+                            </ul>
+                        </td>
+                        <td width="25%">
+                            <h3>Infrastructure</h3>
+                            <ul>
+                                <li>Docker / Compose</li>
+                                <li>GitLab CI / GitHub Actions</li>
+                                <li>Nginx / Prometheus</li>
+                                <li>Kafka / Firebase</li>
+                            </ul>
+                        </td>
+                        <td width="25%">
+                            <h3>Architecture</h3>
+                            <ul>
+                                <li>Clean Architecture</li>
+                                <li>Domain-Driven Design</li>
+                                <li>Event-Driven</li>
+                                <li>API Design (REST/WS)</li>
+                            </ul>
+                        </td>
+                        <td width="25%">
+                            <h3>AI Tools</h3>
+                            <ul>
+                                <li>Claude / Claude Code</li>
+                                <li>OpenAI Codex</li>
+                                <li>Google Gemini</li>
+                                <li>Cursor AI</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <hr class="hr-fancy">
+
+            <h2>Contact Me</h2>
+            <div class="guestbook">
+                <p><span class="email-icon">&#9993;</span> Feel free to reach out!</p>
+                <p>
+                    <a href="mailto:zabozhanov@gmail.com" class="button">&#9993; E-Mail</a>
+                    <a href="https://github.com/z0rgoyok" class="button">GitHub</a>
+                    <a href="https://linkedin.com/in/denis-zabozhanov-415b9358" class="button">LinkedIn</a>
+                </p>
+            </div>
+
+            <hr class="hr-fancy">
+
+            <div class="center">
+                <p>You are visitor number: <span class="counter">000,482</span></p>
+                <p><small>Best viewed with <b>Netscape Navigator 4.0</b> or <b>Internet Explorer 5.0</b> at 800x600</small></p>
+                <p>
+                    <span class="badge">Made with Notepad</span>
+                    <span class="badge">HTML 4.0 Compliant</span>
+                    <span class="badge">Y2K Ready!</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div>Done</div>
+            <div>Internet zone</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright &copy; 1997-2025 Denis Zabozhanov. All Rights Reserved.</p>
+        <p>This page is perpetually under construction <span class="construction">***</span></p>
+    </footer>
+</body>
+</html>
